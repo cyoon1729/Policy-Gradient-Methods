@@ -18,6 +18,7 @@ class A3CAgent:
         self.GLOBAL_MAX_EPISODE = global_max_episode
 
         self.global_network = TwoHeadNetwork(self.env.observation_space.shape[0], self.env.action_space.n)
+        self.global_network.share_memory()
         self.global_optimizer = optim.Adam(self.global_network.parameters(), lr=lr) 
         self.workers = [Worker(i, env, self.gamma, self.global_network, self.global_optimizer, self.global_episode, self.GLOBAL_MAX_EPISODE) for i in range(mp.cpu_count())]
     
@@ -43,7 +44,9 @@ class DecoupledA3CAgent:
         self.GLOBAL_MAX_EPISODE = global_max_episode
 
         self.global_value_network = ValueNetwork(self.env.observation_space.shape[0], 1)
+        self.global_value_network.share_memory()
         self.global_policy_network = PolicyNetwork(self.env.observation_space.shape[0], self.env.action_space.n)
+        self.global_policy_network.share_memory()
         self.global_value_optimizer = optim.Adam(self.global_value_network.parameters(), lr=lr) 
         self.global_policy_optimizer = optim.Adam(self.global_policy_network.parameters(), lr=lr) 
         
