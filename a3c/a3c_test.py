@@ -18,5 +18,5 @@ if __name__ == "__main__":
     lr = 1e-3
     GLOBAL_MAX_EPISODE = 1000
 
-    train_twoHeaded()
-    # train_decoupled()
+    #train_twoHeaded()
+    train_decoupled()
