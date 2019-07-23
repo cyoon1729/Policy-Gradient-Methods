@@ -25,6 +25,9 @@ class Worker(mp.Process):
         self.global_episode = global_episode
         self.global_optimizer = global_optimizer
         self.GLOBAL_MAX_EPISODE = GLOBAL_MAX_EPISODE
+
+        # sync local networks with global
+        self.sync_with_global()
     
     def get_action(self, state):
         state = torch.FloatTensor(state).to(self.device)
@@ -129,6 +132,9 @@ class DecoupledWorker(mp.Process):
         self.global_value_optimizer = global_value_optimizer
         self.global_policy_optimizer = global_policy_optimizer
         self.GLOBAL_MAX_EPISODE = GLOBAL_MAX_EPISODE
+
+        # sync local networks with global networks
+        self.sync_with_global()
     
     def get_action(self, state):
         state = torch.FloatTensor(state).to(self.device)
