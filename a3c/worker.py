@@ -97,7 +97,6 @@ class Worker(mp.Process):
             if done:
                 with self.global_episode.get_lock():
                     self.global_episode.value += 1
-                
                 print(self.name + " | episode: "+ str(self.global_episode.value) + " " + str(episode_reward))
 
                 self.update_global(trajectory)
@@ -213,7 +212,6 @@ class DecoupledWorker(mp.Process):
             if done:
                 with self.global_episode.get_lock():
                     self.global_episode.value += 1
-                
                 print(self.name + " | episode: "+ str(self.global_episode.value) + " " + str(episode_reward))
 
                 self.update_global(trajectory)
