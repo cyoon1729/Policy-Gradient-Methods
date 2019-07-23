@@ -106,8 +106,8 @@ class Worker(mp.Process):
                 trajectory = []
                 episode_reward = 0
                 state = self.env.reset()
-            
-            state = next_state
+            else:
+                state = next_state
 
 
 class DecoupledWorker(mp.Process):
@@ -222,5 +222,5 @@ class DecoupledWorker(mp.Process):
                 trajectory = []
                 episode_reward = 0
                 state = self.env.reset()
-            
-            state = next_state
+            else:
+                state = next_state
